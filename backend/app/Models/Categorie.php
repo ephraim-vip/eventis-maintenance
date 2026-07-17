@@ -1,0 +1,31 @@
+<?php
+
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
+use App\Models\Evenement;
+
+class Categorie extends Model
+{
+    use HasFactory, SoftDeletes;
+
+    protected $table = 'categories';
+
+    protected $fillable = [
+        'libelle'
+    ];
+
+    protected function casts(): array
+    {
+        return [
+            'deleted_at' => 'datetime',
+        ];
+    }
+
+    public function evenements()
+    {
+        return $this->hasMany(Evenement::class);
+    }
+}
