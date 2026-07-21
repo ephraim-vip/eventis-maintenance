@@ -25,9 +25,11 @@ class InscriptionController extends Controller
                 $query->where('evenement_id', $request->evenement_id);
             })
             ->when($request->search, function ($query) use ($request) {
-                $query->where('nom_participant', 'like', '%' . $request->search . '%')
-                    ->orWhere('email_participant', 'like', '%' . $request->search . '%');
-            })
+       $query->where(function ($subQuery) use ($request) {
+        $subQuery->where('nom_participant', 'like', '%' . $request->search . '%')
+            ->orWhere('email_participant', 'like', '%' . $request->search . '%');
+    });
+   })
             ->orderBy('created_at', 'desc')
             ->paginate($perPage);
 
