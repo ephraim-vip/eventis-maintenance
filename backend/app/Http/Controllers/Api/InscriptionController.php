@@ -19,7 +19,7 @@ class InscriptionController extends Controller
      */
     public function index(Request $request)
     {
-        $perPage = $request->query('per_page', 15);
+        $perPage = $this->validatedPerPage($request, 15);
         $inscriptions = Inscription::with(['evenement'])
             ->when($request->evenement_id, function ($query) use ($request) {
                 $query->where('evenement_id', $request->evenement_id);

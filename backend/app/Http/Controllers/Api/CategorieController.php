@@ -16,7 +16,7 @@ class CategorieController extends Controller
      */
     public function index(Request $request)
     {
-        $perPage = $request->query('per_page', 10);
+        $perPage = $this->validatedPerPage($request, 10);
         $categories = Categorie::orderBy('created_at', 'desc')->paginate($perPage);
 
         return CategorieResource::collection($categories);

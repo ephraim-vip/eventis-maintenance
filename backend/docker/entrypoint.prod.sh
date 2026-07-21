@@ -2,6 +2,7 @@
 set -e
 
 echo ">>> [PROD] Lancement en mode production..."
+export APP_DEBUG=false
 
 # Injection du mot de passe depuis le fichier secret Docker
 if [ -f /run/secrets/db_password ]; then

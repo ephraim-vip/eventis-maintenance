@@ -26,7 +26,7 @@ class EvenementController extends Controller
             ->where('date_fin', '<', now())
             ->update(['statut' => 'termine']);
 
-        $perPage = $request->query('per_page', 12);
+        $perPage = $this->validatedPerPage($request, 12);
         $evenements = Evenement::with(['categorie', 'localisation', 'organisateur'])
             ->when($request->statut, function ($query) use ($request) {
                 $query->where('statut', $request->statut);

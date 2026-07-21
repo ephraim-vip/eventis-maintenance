@@ -16,7 +16,7 @@ class LocalisationController extends Controller
      */
     public function index(Request $request)
     {
-        $perPage = $request->query('per_page', 10);
+        $perPage = $this->validatedPerPage($request, 10);
         $localisations = Localisation::orderBy('libelle', 'asc')->paginate($perPage);
 
         return LocalisationResource::collection($localisations);

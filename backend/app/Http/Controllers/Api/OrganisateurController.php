@@ -16,7 +16,7 @@ class OrganisateurController extends Controller
      */
     public function index(Request $request)
     {
-        $perPage = $request->query('per_page', 10);
+       $perPage = $this->validatedPerPage($request, 10);
         $organisateurs = Organisateur::orderBy('created_at', 'desc')->paginate($perPage);
 
         return OrganisateurResource::collection($organisateurs);
