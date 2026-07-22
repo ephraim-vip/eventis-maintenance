@@ -65,21 +65,9 @@ jobs:
         working-directory: backend
         run: php artisan test --coverage --min=60
 
-  deploy:
-    name: Deploy sur Railway
-    runs-on: ubuntu-latest
-    needs: tests
-
-    steps:
-      - name: Install Railway CLI
-        run: npm install -g @railway/cli
-
-      - name: Deploy backend
-        run: railway redeploy --service 0700b3bd-a96f-4235-b7d0-eb079f408593 --environment 3b7340c5-680f-414c-a122-5bdf839bc0ea --yes
-        env:
-          RAILWAY_TOKEN: ${{ secrets.RAILWAY_TOKEN }}
-
-      - name: Deploy frontend
-        run: railway redeploy --service 3b29ea76-a1f7-4cac-8967-d23698f6f259 --environment 3b7340c5-680f-414c-a122-5bdf839bc0ea --yes
-        env:
-          RAILWAY_TOKEN: ${{ secrets.RAILWAY_TOKEN }}
+# Le déploiement n'est plus géré ici : Railway est connecté directement au
+# dépôt GitHub (intégration native) et déploie automatiquement à chaque push
+# sur main, une fois ce job "tests" passé avec succès ("Wait for CI" activé
+# côté Railway). L'ancien job "deploy" utilisait la CLI Railway avec des
+# identifiants de service appartenant à un autre projet Railway (hérité du
+# dépôt d'origine) et un secret RAILWAY_TOKEN jamais configuré ici.
