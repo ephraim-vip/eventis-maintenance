@@ -2,6 +2,7 @@
 set -e
 
 echo ">>> [PROD] Lancement en mode production..."
+echo ">>> [DEBUG] Valeur de \$PORT injectée par Railway : ${PORT}"
 export APP_DEBUG=false
 
 # Injection du mot de passe depuis le fichier secret Docker
