@@ -64,7 +64,24 @@ class EvenementTest extends TestCase
             ->assertJsonCount(1, 'data');
     }
 
-    public function test_index_passe_automatiquement_les_evenements_termines(): void
+    public function test_cloturer_termines_passe_au_statut_termine_les_evenements_expires(): void
+    {
+        $evenement = Evenement::factory()->create([
+            'statut'     => 'publie',
+            'date_debut' => now()->subDays(5),
+            'date_fin'   => now()->subDay(),
+        ]);
+
+        $nbClotures = Evenement::cloturerTermines();
+
+        $this->assertSame(1, $nbClotures);
+        $this->assertDatabaseHas('evenements', [
+            'id'     => $evenement->id,
+            'statut' => 'termine',
+        ]);
+    }
+
+    public function test_index_ne_modifie_plus_les_evenements_au_passage(): void
     {
         $evenement = Evenement::factory()->create([
             'statut'     => 'publie',
@@ -76,7 +93,7 @@ class EvenementTest extends TestCase
 
         $this->assertDatabaseHas('evenements', [
             'id'     => $evenement->id,
-            'statut' => 'termine',
+            'statut' => 'publie',
         ]);
     }
 
@@ -202,7 +219,7 @@ class EvenementTest extends TestCase
             ->assertJson(['success' => true]);
 
         $this->assertDatabaseHas('evenements', ['id' => $evenement->id, 'statut' => 'annule']);
-        Mail::assertSent(EvenementAnnuleMail::class, 2);
+        Mail::assertQueued(EvenementAnnuleMail::class, 2);
     }
 
     public function test_annuler_refuse_un_evenement_deja_annule(): void

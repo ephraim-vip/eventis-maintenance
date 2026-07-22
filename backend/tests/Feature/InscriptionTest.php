@@ -30,7 +30,7 @@ class InscriptionTest extends TestCase
 
         $inscription = Inscription::first();
         $this->assertNotNull($inscription->token_desinscription);
-        Mail::assertSent(InscriptionConfirmationMail::class);
+        Mail::assertQueued(InscriptionConfirmationMail::class);
     }
 
     public function test_inscription_refusee_si_evenement_non_publie(): void
@@ -83,14 +83,14 @@ class InscriptionTest extends TestCase
         $evenement   = Evenement::factory()->publie()->create();
         $inscription = Inscription::factory()->create(['evenement_id' => $evenement->id]);
 
-        $this->getJson("/api/desinscription/{$inscription->token_desinscription}")
+        $this->postJson('/api/desinscription/verifier', ['token' => $inscription->token_desinscription])
             ->assertOk()
             ->assertJson(['success' => true]);
     }
 
     public function test_recuperation_desinscription_avec_token_invalide_retourne_404(): void
     {
-        $this->getJson('/api/desinscription/token-bidon')->assertStatus(404);
+        $this->postJson('/api/desinscription/verifier', ['token' => 'token-bidon'])->assertStatus(404);
     }
 
     public function test_desinscription_avec_token_valide_supprime_l_inscription(): void
@@ -98,7 +98,7 @@ class InscriptionTest extends TestCase
         $evenement   = Evenement::factory()->publie()->create();
         $inscription = Inscription::factory()->create(['evenement_id' => $evenement->id]);
 
-        $this->deleteJson("/api/desinscription/{$inscription->token_desinscription}")
+        $this->postJson('/api/desinscription/confirmer', ['token' => $inscription->token_desinscription])
             ->assertOk();
 
         $this->assertSoftDeleted('inscriptions', ['id' => $inscription->id]);
@@ -109,7 +109,7 @@ class InscriptionTest extends TestCase
         $evenement   = Evenement::factory()->termine()->create();
         $inscription = Inscription::factory()->create(['evenement_id' => $evenement->id]);
 
-        $this->deleteJson("/api/desinscription/{$inscription->token_desinscription}")
+        $this->postJson('/api/desinscription/confirmer', ['token' => $inscription->token_desinscription])
             ->assertStatus(409);
     }
 

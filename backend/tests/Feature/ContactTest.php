@@ -24,9 +24,9 @@ class ContactTest extends TestCase
             ->assertOk()
             ->assertJson(['success' => true]);
 
-        Mail::assertSent(ContactMail::class, function (ContactMail $mail) {
-            return $mail->hasTo(config('mail.from.address'));
-        });
+        Mail::assertQueued(ContactMail::class, function (ContactMail $mail) {
+    return $mail->hasTo(config('mail.from.address'));
+});
     }
 
     public function test_validation_du_formulaire_de_contact(): void
