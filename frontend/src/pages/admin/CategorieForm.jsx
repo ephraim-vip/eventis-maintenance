@@ -104,8 +104,9 @@ export default function CategorieForm() {
                         <div className="bg-white border border-gray-100 rounded-2xl p-6 shadow-sm">
                             <form onSubmit={handleSubmit} noValidate className="space-y-4">
                                 <div>
-                                    <label className="block text-xs font-semibold uppercase tracking-wider text-gray-500 mb-2">Libellé *</label>
+                                    <label htmlFor="categorie-libelle" className="block text-xs font-semibold uppercase tracking-wider text-gray-500 mb-2">Libellé *</label>
                                     <input
+                                        id="categorie-libelle"
                                         type="text"
                                         value={form.libelle}
                                         onChange={(e) => setForm({ libelle: e.target.value })}

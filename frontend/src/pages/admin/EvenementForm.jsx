@@ -164,8 +164,9 @@ export default function EvenementForm() {
 
                                     <div className="space-y-4">
                                         <div>
-                                            <label className="block text-xs font-semibold uppercase tracking-wider text-gray-500 mb-2">Titre *</label>
+                                            <label htmlFor="evenement-titre" className="block text-xs font-semibold uppercase tracking-wider text-gray-500 mb-2">Titre *</label>
                                             <input
+                                                id="evenement-titre"
                                                 type="text"
                                                 value={form.titre}
                                                 onChange={(e) => setForm({ ...form, titre: e.target.value })}
@@ -176,8 +177,9 @@ export default function EvenementForm() {
                                         </div>
 
                                         <div>
-                                            <label className="block text-xs font-semibold uppercase tracking-wider text-gray-500 mb-2">Description</label>
+                                            <label htmlFor="evenement-description" className="block text-xs font-semibold uppercase tracking-wider text-gray-500 mb-2">Description</label>
                                             <textarea
+                                                id="evenement-description"
                                                 value={form.description}
                                                 onChange={(e) => setForm({ ...form, description: e.target.value })}
                                                 placeholder="Description de l'événement"
@@ -188,8 +190,9 @@ export default function EvenementForm() {
                                         </div>
 
                                         <div>
-                                            <label className="block text-xs font-semibold uppercase tracking-wider text-gray-500 mb-2">Lieu</label>
+                                            <label htmlFor="evenement-lieu" className="block text-xs font-semibold uppercase tracking-wider text-gray-500 mb-2">Lieu</label>
                                             <input
+                                                id="evenement-lieu"
                                                 type="text"
                                                 value={form.lieu}
                                                 onChange={(e) => setForm({ ...form, lieu: e.target.value })}
@@ -201,7 +204,7 @@ export default function EvenementForm() {
 
                                         {/* Image */}
                                         <div>
-                                            <label className="block text-xs font-semibold uppercase tracking-wider text-gray-500 mb-2">Image</label>
+                                            <label htmlFor="evenement-image" className="block text-xs font-semibold uppercase tracking-wider text-gray-500 mb-2">Image</label>
                                             {imagePreview ? (
                                                 <div className="mb-3">
                                                     <img src={imagePreview} alt="Aperçu" className="w-full h-40 object-cover rounded-xl" />
@@ -213,6 +216,7 @@ export default function EvenementForm() {
                                                 </div>
                                             ) : null}
                                             <input
+                                                id="evenement-image"
                                                 type="file"
                                                 accept="image/jpeg,image/png,image/jpg,image/webp"
                                                 onChange={handleImageChange}
@@ -228,8 +232,9 @@ export default function EvenementForm() {
                                     <h2 className="text-sm font-bold text-gray-900 mb-5 uppercase tracking-wide">Dates</h2>
                                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                                         <div>
-                                            <label className="block text-xs font-semibold uppercase tracking-wider text-gray-500 mb-2">Date de début *</label>
+                                            <label htmlFor="evenement-date-debut" className="block text-xs font-semibold uppercase tracking-wider text-gray-500 mb-2">Date de début *</label>
                                             <input
+                                                id="evenement-date-debut"
                                                 type="datetime-local"
                                                 value={form.date_debut}
                                                 onChange={(e) => setForm({ ...form, date_debut: e.target.value })}
@@ -238,8 +243,9 @@ export default function EvenementForm() {
                                             {errors.date_debut && <p className="text-xs text-red-500 mt-1">{errors.date_debut[0]}</p>}
                                         </div>
                                         <div>
-                                            <label className="block text-xs font-semibold uppercase tracking-wider text-gray-500 mb-2">Date de fin</label>
+                                            <label htmlFor="evenement-date-fin" className="block text-xs font-semibold uppercase tracking-wider text-gray-500 mb-2">Date de fin</label>
                                             <input
+                                                id="evenement-date-fin"
                                                 type="datetime-local"
                                                 value={form.date_fin}
                                                 onChange={(e) => setForm({ ...form, date_fin: e.target.value })}
@@ -260,8 +266,9 @@ export default function EvenementForm() {
 
                                     <div className="space-y-4">
                                         <div>
-                                            <label className="block text-xs font-semibold uppercase tracking-wider text-gray-500 mb-2">Catégorie *</label>
+                                            <label htmlFor="evenement-categorie" className="block text-xs font-semibold uppercase tracking-wider text-gray-500 mb-2">Catégorie *</label>
                                             <select
+                                                id="evenement-categorie"
                                                 value={form.categorie_id}
                                                 onChange={(e) => setForm({ ...form, categorie_id: e.target.value })}
                                                 className="w-full px-4 py-3 rounded-xl border border-gray-200 bg-gray-50 text-sm text-gray-900 focus:outline-none focus:border-red-400"
@@ -275,8 +282,9 @@ export default function EvenementForm() {
                                         </div>
 
                                         <div>
-                                            <label className="block text-xs font-semibold uppercase tracking-wider text-gray-500 mb-2">Localisation *</label>
+                                            <label htmlFor="evenement-localisation" className="block text-xs font-semibold uppercase tracking-wider text-gray-500 mb-2">Localisation *</label>
                                             <select
+                                                id="evenement-localisation"
                                                 value={form.localisation_id}
                                                 onChange={(e) => setForm({ ...form, localisation_id: e.target.value })}
                                                 className="w-full px-4 py-3 rounded-xl border border-gray-200 bg-gray-50 text-sm text-gray-900 focus:outline-none focus:border-red-400"
@@ -290,8 +298,9 @@ export default function EvenementForm() {
                                         </div>
 
                                         <div>
-                                            <label className="block text-xs font-semibold uppercase tracking-wider text-gray-500 mb-2">Organisateur *</label>
+                                            <label htmlFor="evenement-organisateur" className="block text-xs font-semibold uppercase tracking-wider text-gray-500 mb-2">Organisateur *</label>
                                             <select
+                                                id="evenement-organisateur"
                                                 value={form.organisateur_id}
                                                 onChange={(e) => setForm({ ...form, organisateur_id: e.target.value })}
                                                 className="w-full px-4 py-3 rounded-xl border border-gray-200 bg-gray-50 text-sm text-gray-900 focus:outline-none focus:border-red-400"
@@ -305,8 +314,9 @@ export default function EvenementForm() {
                                         </div>
 
                                         <div>
-                                            <label className="block text-xs font-semibold uppercase tracking-wider text-gray-500 mb-2">Capacité max</label>
+                                            <label htmlFor="evenement-capacite" className="block text-xs font-semibold uppercase tracking-wider text-gray-500 mb-2">Capacité max</label>
                                             <input
+                                                id="evenement-capacite"
                                                 type="number"
                                                 value={form.capacite_max}
                                                 onChange={(e) => setForm({ ...form, capacite_max: e.target.value })}

@@ -116,8 +116,9 @@ export default function OrganisateurForm() {
                         <div className="bg-white border border-gray-100 rounded-2xl p-6 shadow-sm">
                             <form onSubmit={handleSubmit} noValidate className="space-y-4">
                                 <div>
-                                    <label className="block text-xs font-semibold uppercase tracking-wider text-gray-500 mb-2">Nom *</label>
+                                    <label htmlFor="organisateur-nom" className="block text-xs font-semibold uppercase tracking-wider text-gray-500 mb-2">Nom *</label>
                                     <input
+                                        id="organisateur-nom"
                                         type="text"
                                         value={form.nom}
                                         onChange={(e) => setForm({ ...form, nom: e.target.value })}
@@ -128,8 +129,9 @@ export default function OrganisateurForm() {
                                 </div>
 
                                 <div>
-                                    <label className="block text-xs font-semibold uppercase tracking-wider text-gray-500 mb-2">Email</label>
+                                    <label htmlFor="organisateur-email" className="block text-xs font-semibold uppercase tracking-wider text-gray-500 mb-2">Email</label>
                                     <input
+                                        id="organisateur-email"
                                         type="email"
                                         value={form.email}
                                         onChange={(e) => setForm({ ...form, email: e.target.value })}
@@ -140,8 +142,9 @@ export default function OrganisateurForm() {
                                 </div>
 
                                 <div>
-                                    <label className="block text-xs font-semibold uppercase tracking-wider text-gray-500 mb-2">Téléphone</label>
+                                    <label htmlFor="organisateur-telephone" className="block text-xs font-semibold uppercase tracking-wider text-gray-500 mb-2">Téléphone</label>
                                     <input
+                                        id="organisateur-telephone"
                                         type="text"
                                         value={form.telephone}
                                         onChange={(e) => setForm({ ...form, telephone: e.target.value })}
@@ -152,8 +155,9 @@ export default function OrganisateurForm() {
                                 </div>
 
                                 <div>
-                                    <label className="block text-xs font-semibold uppercase tracking-wider text-gray-500 mb-2">Description</label>
+                                    <label htmlFor="organisateur-description" className="block text-xs font-semibold uppercase tracking-wider text-gray-500 mb-2">Description</label>
                                     <textarea
+                                        id="organisateur-description"
                                         value={form.description}
                                         onChange={(e) => setForm({ ...form, description: e.target.value })}
                                         placeholder="Description de l'organisateur"
