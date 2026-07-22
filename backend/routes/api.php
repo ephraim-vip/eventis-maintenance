@@ -30,9 +30,8 @@ Route::get('/localisations/{id}', [LocalisationController::class, 'show'])->name
 
 // Inscriptions
 Route::post('/inscriptions', [InscriptionController::class, 'store'])->name('api.inscriptions.store');
-Route::get('/desinscription/{token}', [InscriptionController::class, 'getDesinscription'])->name('api.inscriptions.get.desinscription');
-Route::delete('/desinscription/{token}', [InscriptionController::class, 'desinscription'])->name('api.inscriptions.desinscription');
-
+Route::post('/desinscription/verifier', [InscriptionController::class, 'getDesinscription'])->name('api.inscriptions.get.desinscription');
+Route::post('/desinscription/confirmer', [InscriptionController::class, 'desinscription'])->name('api.inscriptions.desinscription');
 // Contact
 Route::post('/contact', [ContactController::class, 'store'])->name('api.contact.store');
 

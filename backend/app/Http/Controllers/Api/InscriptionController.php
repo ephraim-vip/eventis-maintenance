@@ -25,11 +25,11 @@ class InscriptionController extends Controller
                 $query->where('evenement_id', $request->evenement_id);
             })
             ->when($request->search, function ($query) use ($request) {
-       $query->where(function ($subQuery) use ($request) {
-        $subQuery->where('nom_participant', 'like', '%' . $request->search . '%')
-            ->orWhere('email_participant', 'like', '%' . $request->search . '%');
-    });
-   })
+                $query->where(function ($subQuery) use ($request) {
+                    $subQuery->where('nom_participant', 'like', '%' . $request->search . '%')
+                        ->orWhere('email_participant', 'like', '%' . $request->search . '%');
+                });
+            })
             ->orderBy('created_at', 'desc')
             ->paginate($perPage);
 
@@ -106,10 +106,12 @@ class InscriptionController extends Controller
     /**
      * Récupérer les infos d'une inscription via token (public)
      */
-    public function getDesinscription($token)
+    public function getDesinscription(Request $request)
     {
+        $request->validate(['token' => 'required|string']);
+
         $inscription = Inscription::with(['evenement.localisation'])
-            ->where('token_desinscription', $token)
+            ->where('token_desinscription', $request->input('token'))
             ->first();
 
         if (!$inscription) {
@@ -128,11 +130,12 @@ class InscriptionController extends Controller
     /**
      * Désinscription via token (public)
      */
-    public function desinscription($token)
+    public function desinscription(Request $request)
     {
-        $inscription = Inscription::where('token_desinscription', $token)->firstOrFail();
+        $request->validate(['token' => 'required|string']);
 
-        // Vérifier que l'événement n'est pas terminé ou annulé
+        $inscription = Inscription::where('token_desinscription', $request->input('token'))->firstOrFail();
+
         if (in_array($inscription->evenement->statut, ['termine', 'annule'])) {
             return response()->json([
                 'success' => false,
