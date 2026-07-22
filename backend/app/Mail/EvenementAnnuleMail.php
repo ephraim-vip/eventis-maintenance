@@ -5,12 +5,13 @@ namespace App\Mail;
 use App\Models\Evenement;
 use App\Models\Inscription;
 use Illuminate\Bus\Queueable;
+use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
 
-class EvenementAnnuleMail extends Mailable
+class EvenementAnnuleMail extends Mailable implements ShouldQueue
 {
     use Queueable, SerializesModels;
 

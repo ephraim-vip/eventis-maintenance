@@ -20,12 +20,6 @@ class EvenementController extends Controller
      */
     public function index(Request $request)
     {
-        // Passer automatiquement les événements terminés au statut termine
-        Evenement::where('statut', 'publie')
-            ->whereNotNull('date_fin')
-            ->where('date_fin', '<', now())
-            ->update(['statut' => 'termine']);
-
         $perPage = $this->validatedPerPage($request, 12);
         $evenements = Evenement::with(['categorie', 'localisation', 'organisateur'])
             ->when($request->statut, function ($query) use ($request) {

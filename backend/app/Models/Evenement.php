@@ -60,4 +60,12 @@ class Evenement extends Model
     {
         return $this->hasMany(Inscription::class);
     }
+
+    public static function cloturerTermines(): int
+{
+    return static::where('statut', 'publie')
+        ->whereNotNull('date_fin')
+        ->where('date_fin', '<', now())
+        ->update(['statut' => 'termine']);
+}
 }
