@@ -9,6 +9,8 @@ import Catalogue from './pages/public/Catalogue'
 import DetailEvenement from './pages/public/DetailEvenement'
 import Desinscription from './pages/public/Desinscription'
 import Contact from './pages/public/Contact'
+import MentionsLegales from './pages/public/MentionsLegales'
+import PolitiqueConfidentialite from './pages/public/PolitiqueConfidentialite'
 
 // Pages admin
 import Login from './pages/admin/Login'
@@ -37,6 +39,8 @@ export default function App() {
                     <Route path="/evenements/:id" element={<DetailEvenement />} />
                     <Route path="/desinscription/:token" element={<Desinscription />} />
                     <Route path="/contact" element={<Contact />} />
+                    <Route path="/mentions-legales" element={<MentionsLegales />} />
+                    <Route path="/politique-de-confidentialite" element={<PolitiqueConfidentialite />} />
 
                     {/* Auth */}
                     <Route path="/admin/login" element={<Login />} />
