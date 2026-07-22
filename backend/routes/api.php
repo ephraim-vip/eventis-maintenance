@@ -12,7 +12,9 @@ use Illuminate\Support\Facades\Route;
 // ── ROUTES PUBLIQUES
 
 // Authentification
-Route::post('/login', [AuthController::class, 'login'])->name('api.auth.login');
+Route::post('/login', [AuthController::class, 'login'])
+    ->middleware('throttle:5,1')
+    ->name('api.auth.login');
 
 // Événements
 Route::get('/evenements', [EvenementController::class, 'index'])->name('api.evenements.index');
